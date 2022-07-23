@@ -12,3 +12,8 @@ function switchPlayer() {
     if (currentPlayer === "x") {currentPlayer = "o"}
     else if (currentPlayer === "o") {currentPlayer = "x"}
 }
+
+function inputTurn(x, y) {
+    gameState.board[y][x] = currentPlayer
+    switchPlayer()
+}
