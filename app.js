@@ -14,6 +14,7 @@ function switchPlayer() {
 }
 
 function inputTurn(x, y) {
+  if (!gameState.board[y][x]) {
     gameState.board[y][x] = currentPlayer
-    switchPlayer()
+    switchPlayer()}
 }
