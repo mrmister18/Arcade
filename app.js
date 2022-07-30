@@ -24,7 +24,8 @@ function checkAcross() {
   for (let i = 0; i < gameState.board.length; i++) {
     let boardRow = gameState.board[i]
     if (boardRow[0] === boardRow[1] && boardRow[1] === boardRow[2] && boardRow[0]) {
-      return "You Win!"
+      switchPlayer()
+      return `${currentPlayer} wins!`
     }
   }
 }
@@ -45,16 +46,25 @@ function checkDiagonal() {
   }
 }
 
+function checkTie() {
+  for (let i = 0; i < gameState.board.length; i++) {
+    for (let j = 0; j < gameState.board[i].length; j++) {
+      if (!gameState.board[i][j]) {return}}}
+    return "Tie"
+    }
+
 function checkWin() {
   if (checkAcross()){return checkAcross()}
   else if (checkVertical()){return checkVertical()}
   else if (checkDiagonal()) {return checkDiagonal()}
+  else if (checkTie()) {return checkTie()}
 }
 
 let onePlayer = document.getElementById("onePlayer")
 let twoPlayer = document.getElementById("twoPlayer")
 
 let playerName = document.createElement("input")
+playerName.setAttribute("id", "playerName")
 let playerTwoName = document.createElement("input")
 let submit = document.getElementsByClassName("submit")
 let computer = document.createElement("div").innerText = "Computer"
@@ -87,7 +97,7 @@ submit[0].addEventListener("click", function() {
   if (playerName.value) {
     gameState.playerNames[0] += playerName.value
     playerName.replaceWith(onePlayer.innerText = playerName.value)
-    submit[0].remove()
+    submit[0].innerText = ""
   }})
 
 submit[1].addEventListener("click", function() {
@@ -96,7 +106,7 @@ gameState.playerNames[0] += playerName.value
     playerName.replaceWith(onePlayer.innerText = playerName.value)
 gameState.playerNames[1] += playerTwoName.value
 playerTwoName.replaceWith(twoPlayer.innerText = playerTwoName.value)
-submit[1].remove()
+submit[1].innerText = ""
   }
 })
 
