@@ -46,3 +46,19 @@ body {
     background-color: #20C20E;
     color: black;
 }
+
+#2Player {
+    margin: 50px 50px;
+    padding: 15px;
+    width: 150px;
+}
+
+input {
+    width: 150px;
+    margin: 50px 50px;
+}
+
+button:hover {
+    background-color: #20C20E;
+    color: black;
+}

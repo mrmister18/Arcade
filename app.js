@@ -4,7 +4,8 @@ let gameState = {
       [null, null, null],
       [null, null, null],
       [null, null, null]
-    ]
+    ],
+    playerNames: ["", ""]
   }
   let currentPlayer = gameState.players[Math.round(Math.random())]
 
@@ -53,8 +54,45 @@ function checkWin() {
 let onePlayer = document.getElementById("1Player")
 let twoPlayer = document.getElementById("2Player")
 let playerName = document.createElement("input")
+let playerTwoName = document.createElement("input")
+let submit = document.getElementsByClassName("submit")
+let computer = document.createElement("div").innerText = "Computer"
+let board = document.querySelector(".board")
 
 onePlayer.addEventListener("click", function() {
   onePlayer.replaceWith(playerName)
-  twoPlayer.innerText = "Computer"
+  twoPlayer.replaceWith(computer)
+  submit[0].innerText = "Submit"
+  gameState.playerNames[1] += "Computer"
 })
+
+twoPlayer.addEventListener("click", function() {
+  onePlayer.replaceWith(playerName)
+  twoPlayer.replaceWith(playerTwoName)
+  submit[1].innerText = "Submit"
+})
+
+submit[0].addEventListener("click", function() {
+  if (playerName.value) {
+    gameState.playerNames[0] += playerName.value
+    playerName.replaceWith(onePlayer.innerText = playerName.value)
+    submit[0].remove()
+  }})
+
+submit[1].addEventListener("click", function() {
+  if (playerName.value && playerTwoName.value) {
+gameState.playerNames[0] += playerName.value
+    playerName.replaceWith(onePlayer.innerText = playerName.value)
+gameState.playerNames[1] += playerTwoName.value
+playerTwoName.replaceWith(twoPlayer.innerText = playerTwoName.value)
+submit[1].remove()
+  }
+})
+
+board.addEventListener("click", function(event) {
+  let spot = event.target.id
+  if (gameState.playerNames[0] && gameState.playerNames[1]) {
+  if (spot === "one") {console.log("test complete")}
+}
+})
+
