@@ -53,11 +53,22 @@ function checkWin() {
 
 let onePlayer = document.getElementById("1Player")
 let twoPlayer = document.getElementById("2Player")
+
 let playerName = document.createElement("input")
 let playerTwoName = document.createElement("input")
 let submit = document.getElementsByClassName("submit")
 let computer = document.createElement("div").innerText = "Computer"
+
 let board = document.querySelector(".board")
+let spotOne = document.getElementById("one")
+let spotTwo = document.getElementById("two")
+let spotThree = document.getElementById("three")
+let spotFour = document.getElementById("four")
+let spotFive = document.getElementById("five")
+let spotSix = document.getElementById("six")
+let spotSeven = document.getElementById("seven")
+let spotEight = document.getElementById("eight")
+let spotNine = document.getElementById("nine")
 
 onePlayer.addEventListener("click", function() {
   onePlayer.replaceWith(playerName)
@@ -89,10 +100,70 @@ submit[1].remove()
   }
 })
 
+document.getElementById("reset").addEventListener("click", function() {
+  gameState = {
+    players: ['x', 'o'],
+    board: [
+      [null, null, null],
+      [null, null, null],
+      [null, null, null]
+    ],
+    playerNames: ["", ""]
+  }
+  spotOne.innerText = ""
+  spotTwo.innerText = ""
+  spotThree.innerText = ""
+  spotFour.innerText = ""
+  spotFive.innerText = ""
+  spotSix.innerText = ""
+  spotSeven.innerText = ""
+  spotEight.innerText = ""
+  spotNine.innerText = ""
+  document.getElementById("playerName").replaceWith(onePlayer)
+  playerTwoName.replaceWith(twoPlayer)
+  computer.replaceWith(twoPlayer)
+})
+
+
 board.addEventListener("click", function(event) {
   let spot = event.target.id
   if (gameState.playerNames[0] && gameState.playerNames[1]) {
-  if (spot === "one") {console.log("test complete")}
+  if (spot === "one") {
+    inputTurn(0, 0)
+    spotOne.innerText = gameState.board[0][0]
+  }
+  if (spot === "two") {
+    inputTurn(1, 0)
+    spotTwo.innerText = gameState.board[0][1]
+  }
+  if (spot === "three") {
+    inputTurn(2, 0)
+    spotThree.innerText = gameState.board[0][2]
+  }
+  if (spot === "four") {
+    inputTurn(0, 1)
+    spotFour.innerText = gameState.board[1][0]
+  }
+  if (spot === "five") {
+    inputTurn(1, 1)
+    spotFive.innerText = gameState.board[1][1]
+  }
+  if (spot === "six") {
+    inputTurn(2, 1)
+    spotSix.innerText = gameState.board[1][2]
+  }
+  if (spot === "seven") {
+    inputTurn(0, 2)
+    spotSeven.innerText = gameState.board[2][0]
+  }
+  if (spot === "eight") {
+    inputTurn(1, 2)
+    spotEight.innerText = gameState.board[2][1]
+  }
+  if (spot === "nine") {
+    inputTurn(2, 2)
+    spotNine.innerText = gameState.board[2][2]
+  }
+  
 }
 })
-
