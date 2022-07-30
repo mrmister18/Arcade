@@ -39,20 +39,20 @@ function checkVertical() {
 
 function checkDiagonal() {
   if (gameState.board[0][0] === gameState.board[1][1] && gameState.board[1][1] === gameState.board[2][2] && gameState.board[0][0]) {
-    console.log("You Win!")
+    return"You Win!"
   } else if (gameState.board[0][2] === gameState.board[1][1] && gameState.board[1][1] === gameState.board[2][0] && gameState.board[1][1]) {
-    console.log("You Win!")
+    return "You Win!"
   }
 }
 
 function checkWin() {
-  checkAcross()
-  checkVertical()
-  checkDiagonal()
+  if (checkAcross()){return checkAcross()}
+  else if (checkVertical()){return checkVertical()}
+  else if (checkDiagonal()) {return checkDiagonal()}
 }
 
-let onePlayer = document.getElementById("1Player")
-let twoPlayer = document.getElementById("2Player")
+let onePlayer = document.getElementById("onePlayer")
+let twoPlayer = document.getElementById("twoPlayer")
 
 let playerName = document.createElement("input")
 let playerTwoName = document.createElement("input")
@@ -119,6 +119,7 @@ document.getElementById("reset").addEventListener("click", function() {
   spotSeven.innerText = ""
   spotEight.innerText = ""
   spotNine.innerText = ""
+  document.querySelector("h3").innerText = ""
   document.getElementById("playerName").replaceWith(onePlayer)
   playerTwoName.replaceWith(twoPlayer)
   computer.replaceWith(twoPlayer)
@@ -127,7 +128,7 @@ document.getElementById("reset").addEventListener("click", function() {
 
 board.addEventListener("click", function(event) {
   let spot = event.target.id
-  if (gameState.playerNames[0] && gameState.playerNames[1]) {
+  if (gameState.playerNames[0] && gameState.playerNames[1] && document.querySelector("h3").innerText === "") {
   if (spot === "one") {
     inputTurn(0, 0)
     spotOne.innerText = gameState.board[0][0]
@@ -164,6 +165,7 @@ board.addEventListener("click", function(event) {
     inputTurn(2, 2)
     spotNine.innerText = gameState.board[2][2]
   }
-  
+  if (checkWin())
+  document.querySelector("h3").innerText = checkWin()
 }
 })
