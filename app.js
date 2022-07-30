@@ -24,8 +24,7 @@ function checkAcross() {
   for (let i = 0; i < gameState.board.length; i++) {
     let boardRow = gameState.board[i]
     if (boardRow[0] === boardRow[1] && boardRow[1] === boardRow[2] && boardRow[0]) {
-      switchPlayer()
-      return `${currentPlayer} wins!`
+      return `${boardRow[0]} wins!`
     }
   }
 }
@@ -33,16 +32,16 @@ function checkAcross() {
 function checkVertical() {
   for (let i = 0; i < gameState.board.length; i++) {
     if (gameState.board[0][i] === gameState.board[1][i] && gameState.board[1][i] === gameState.board[2][i] && gameState.board[0][i]) {
-      return "You Win!"
+      return `${gameState.board[0][i]} wins!`
     }
   }
 }
 
 function checkDiagonal() {
   if (gameState.board[0][0] === gameState.board[1][1] && gameState.board[1][1] === gameState.board[2][2] && gameState.board[0][0]) {
-    return"You Win!"
+    return `${gameState.board[0][0]} wins!`
   } else if (gameState.board[0][2] === gameState.board[1][1] && gameState.board[1][1] === gameState.board[2][0] && gameState.board[1][1]) {
-    return "You Win!"
+    return `${gameState.board[0][2]} wins!`
   }
 }
 
@@ -64,7 +63,6 @@ let onePlayer = document.getElementById("onePlayer")
 let twoPlayer = document.getElementById("twoPlayer")
 
 let playerName = document.createElement("input")
-playerName.setAttribute("id", "playerName")
 let playerTwoName = document.createElement("input")
 let submit = document.getElementsByClassName("submit")
 let computer = document.createElement("div").innerText = "Computer"
@@ -82,7 +80,7 @@ let spotNine = document.getElementById("nine")
 
 onePlayer.addEventListener("click", function() {
   onePlayer.replaceWith(playerName)
-  twoPlayer.replaceWith(computer)
+  twoPlayer.replaceWith("Computer")
   submit[0].innerText = "Submit"
   gameState.playerNames[1] += "Computer"
 })
@@ -96,7 +94,7 @@ twoPlayer.addEventListener("click", function() {
 submit[0].addEventListener("click", function() {
   if (playerName.value) {
     gameState.playerNames[0] += playerName.value
-    playerName.replaceWith(onePlayer.innerText = playerName.value)
+    playerName.replaceWith(playerName.value)
     submit[0].innerText = ""
   }})
 
