@@ -65,7 +65,8 @@ let twoPlayer = document.getElementById("twoPlayer")
 let playerName = document.createElement("input")
 let playerTwoName = document.createElement("input")
 let submit = document.getElementsByClassName("submit")
-let computer = document.createElement("div").innerText = "Computer"
+let playerDisplay = document.getElementById("playerDisplay")
+let playerTwoDisplay = document.getElementById("playerTwoDisplay")
 
 let board = document.querySelector(".board")
 let spotOne = document.getElementById("one")
@@ -80,7 +81,8 @@ let spotNine = document.getElementById("nine")
 
 onePlayer.addEventListener("click", function() {
   onePlayer.replaceWith(playerName)
-  twoPlayer.replaceWith("Computer")
+  twoPlayer.replaceWith(playerTwoDisplay)
+  playerTwoDisplay.innerText = "Computer"
   submit[0].innerText = "Submit"
   gameState.playerNames[1] += "Computer"
 })
@@ -94,16 +96,19 @@ twoPlayer.addEventListener("click", function() {
 submit[0].addEventListener("click", function() {
   if (playerName.value) {
     gameState.playerNames[0] += playerName.value
-    playerName.replaceWith(playerName.value)
+    playerDisplay.innerText = playerName.value
+    playerName.replaceWith(playerDisplay)
     submit[0].innerText = ""
   }})
 
 submit[1].addEventListener("click", function() {
   if (playerName.value && playerTwoName.value) {
 gameState.playerNames[0] += playerName.value
-    playerName.replaceWith(onePlayer.innerText = playerName.value)
+    playerName.replaceWith(playerDisplay)
+    playerDisplay.innerText = playerName.value
 gameState.playerNames[1] += playerTwoName.value
-playerTwoName.replaceWith(twoPlayer.innerText = playerTwoName.value)
+playerTwoDisplay.innerText = playerTwoName.value
+playerTwoName.replaceWith(playerTwoDisplay)
 submit[1].innerText = ""
   }
 })
@@ -127,16 +132,17 @@ document.getElementById("reset").addEventListener("click", function() {
   spotSeven.innerText = ""
   spotEight.innerText = ""
   spotNine.innerText = ""
-  document.querySelector("h3").innerText = ""
-  document.getElementById("playerName").replaceWith(onePlayer)
-  playerTwoName.replaceWith(twoPlayer)
-  computer.replaceWith(twoPlayer)
+  document.querySelector("h1").innerText = ""
+  playerDisplay.replaceWith(onePlayer)
+  playerTwoDisplay.replaceWith(twoPlayer)
+  playerName.value = ""
+  playerTwoName.value = ""
 })
 
 
 board.addEventListener("click", function(event) {
   let spot = event.target.id
-  if (gameState.playerNames[0] && gameState.playerNames[1] && document.querySelector("h3").innerText === "") {
+  if (gameState.playerNames[0] && gameState.playerNames[1] && document.querySelector("h1").innerText === "") {
   if (spot === "one") {
     inputTurn(0, 0)
     spotOne.innerText = gameState.board[0][0]
@@ -174,6 +180,6 @@ board.addEventListener("click", function(event) {
     spotNine.innerText = gameState.board[2][2]
   }
   if (checkWin())
-  document.querySelector("h3").innerText = checkWin()
+  document.querySelector("h1").innerText = checkWin()
 }
 })
