@@ -26,8 +26,10 @@ function computerTurn() {
     for (let j = 0; j < gameState.board[i].length; j++) {
       if (!gameState.board[i][j]) {
         potentialMoves.push([j, i])}}
-  } let move = potentialMoves[Math.floor(Math.random() * potentialMoves.length)]
+  } 
+  let move = potentialMoves[Math.floor(Math.random() * potentialMoves.length)]
   inputTurn(move[0], move[1])
+  updateBoard()
 }
 
 function checkAcross() {
@@ -67,6 +69,19 @@ function checkWin() {
   else if (checkVertical()){return checkVertical()}
   else if (checkDiagonal()) {return checkDiagonal()}
   else if (checkTie()) {return checkTie()}
+}
+
+// Tried function to update Xs and Os to be uppercase but broke function for some reason
+function updateBoard() {
+  spotOne.innerText = gameState.board[0][0]
+  spotTwo.innerText = gameState.board[0][1]
+  spotThree.innerText = gameState.board[0][2]
+  spotFour.innerText = gameState.board[1][0]
+  spotFive.innerText = gameState.board[1][1]
+  spotSix.innerText = gameState.board[1][2]
+  spotSeven.innerText = gameState.board[2][0]
+  spotEight.innerText = gameState.board[2][1]
+  spotNine.innerText = gameState.board[2][2]
 }
 
 let onePlayer = document.getElementById("onePlayer")
@@ -155,41 +170,74 @@ board.addEventListener("click", function(event) {
   if (gameState.playerNames[0] && gameState.playerNames[1] && document.querySelector("h1").innerText === "") {
   if (spot === "one") {
     inputTurn(0, 0)
-    spotOne.innerText = gameState.board[0][0].toUpperCase()
   }
   if (spot === "two") {
     inputTurn(1, 0)
-    spotTwo.innerText = gameState.board[0][1].toUpperCase()
   }
   if (spot === "three") {
     inputTurn(2, 0)
-    spotThree.innerText = gameState.board[0][2].toUpperCase()
   }
   if (spot === "four") {
     inputTurn(0, 1)
-    spotFour.innerText = gameState.board[1][0].toUpperCase()
   }
   if (spot === "five") {
     inputTurn(1, 1)
-    spotFive.innerText = gameState.board[1][1].toUpperCase()
   }
   if (spot === "six") {
     inputTurn(2, 1)
-    spotSix.innerText = gameState.board[1][2].toUpperCase()
   }
   if (spot === "seven") {
     inputTurn(0, 2)
-    spotSeven.innerText = gameState.board[2][0].toUpperCase()
   }
   if (spot === "eight") {
     inputTurn(1, 2)
-    spotEight.innerText = gameState.board[2][1].toUpperCase()
   }
   if (spot === "nine") {
     inputTurn(2, 2)
-    spotNine.innerText = gameState.board[2][2].toUpperCase()
   }
-  if (checkWin())
+  if (checkWin()) {
+    updateBoard()
   document.querySelector("h1").innerText = checkWin()
+}
+updateBoard()
+}
+})
+
+board.addEventListener("click", function(event) {
+  let spot = event.target.id
+  if (gameState.playerNames[0] && gameState.playerNames[1] === "Computer" && document.querySelector("h1").innerText === "") {
+  if (spot === "one") {
+    inputTurn(0, 0)
+  }
+  if (spot === "two") {
+    inputTurn(1, 0)
+  }
+  if (spot === "three") {
+    inputTurn(2, 0)
+  }
+  if (spot === "four") {
+    inputTurn(0, 1)
+  }
+  if (spot === "five") {
+    inputTurn(1, 1)
+  }
+  if (spot === "six") {
+    inputTurn(2, 1)
+  }
+  if (spot === "seven") {
+    inputTurn(0, 2)
+  }
+  if (spot === "eight") {
+    inputTurn(1, 2)
+  }
+  if (spot === "nine") {
+    inputTurn(2, 2)
+  }
+  if (checkWin()) {
+    updateBoard()
+  document.querySelector("h1").innerText = checkWin()
+}
+computerTurn()
+updateBoard()
 }
 })
