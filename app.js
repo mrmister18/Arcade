@@ -20,11 +20,21 @@ function inputTurn(x, y) {
     switchPlayer()}
 }
 
+function computerTurn() {
+  let potentialMoves = []
+  for (let i = 0; i < gameState.board.length; i++) {
+    for (let j = 0; j < gameState.board[i].length; j++) {
+      if (!gameState.board[i][j]) {
+        potentialMoves.push([j, i])}}
+  } let move = potentialMoves[Math.floor(Math.random() * potentialMoves.length)]
+  inputTurn(move[0], move[1])
+}
+
 function checkAcross() {
   for (let i = 0; i < gameState.board.length; i++) {
     let boardRow = gameState.board[i]
     if (boardRow[0] === boardRow[1] && boardRow[1] === boardRow[2] && boardRow[0]) {
-      return `${boardRow[0]} wins!`
+      return `${boardRow[0].toUpperCase()} Wins!`
     }
   }
 }
@@ -32,16 +42,16 @@ function checkAcross() {
 function checkVertical() {
   for (let i = 0; i < gameState.board.length; i++) {
     if (gameState.board[0][i] === gameState.board[1][i] && gameState.board[1][i] === gameState.board[2][i] && gameState.board[0][i]) {
-      return `${gameState.board[0][i]} wins!`
+      return `${gameState.board[0][i].toUpperCase()} Wins!`
     }
   }
 }
 
 function checkDiagonal() {
   if (gameState.board[0][0] === gameState.board[1][1] && gameState.board[1][1] === gameState.board[2][2] && gameState.board[0][0]) {
-    return `${gameState.board[0][0]} wins!`
+    return `${gameState.board[0][0].toUpperCase()} Wins!`
   } else if (gameState.board[0][2] === gameState.board[1][1] && gameState.board[1][1] === gameState.board[2][0] && gameState.board[1][1]) {
-    return `${gameState.board[0][2]} wins!`
+    return `${gameState.board[0][2].toUpperCase()} Wins!`
   }
 }
 
@@ -49,7 +59,7 @@ function checkTie() {
   for (let i = 0; i < gameState.board.length; i++) {
     for (let j = 0; j < gameState.board[i].length; j++) {
       if (!gameState.board[i][j]) {return}}}
-    return "Tie"
+    return "Tie :-["
     }
 
 function checkWin() {
@@ -145,39 +155,39 @@ board.addEventListener("click", function(event) {
   if (gameState.playerNames[0] && gameState.playerNames[1] && document.querySelector("h1").innerText === "") {
   if (spot === "one") {
     inputTurn(0, 0)
-    spotOne.innerText = gameState.board[0][0]
+    spotOne.innerText = gameState.board[0][0].toUpperCase()
   }
   if (spot === "two") {
     inputTurn(1, 0)
-    spotTwo.innerText = gameState.board[0][1]
+    spotTwo.innerText = gameState.board[0][1].toUpperCase()
   }
   if (spot === "three") {
     inputTurn(2, 0)
-    spotThree.innerText = gameState.board[0][2]
+    spotThree.innerText = gameState.board[0][2].toUpperCase()
   }
   if (spot === "four") {
     inputTurn(0, 1)
-    spotFour.innerText = gameState.board[1][0]
+    spotFour.innerText = gameState.board[1][0].toUpperCase()
   }
   if (spot === "five") {
     inputTurn(1, 1)
-    spotFive.innerText = gameState.board[1][1]
+    spotFive.innerText = gameState.board[1][1].toUpperCase()
   }
   if (spot === "six") {
     inputTurn(2, 1)
-    spotSix.innerText = gameState.board[1][2]
+    spotSix.innerText = gameState.board[1][2].toUpperCase()
   }
   if (spot === "seven") {
     inputTurn(0, 2)
-    spotSeven.innerText = gameState.board[2][0]
+    spotSeven.innerText = gameState.board[2][0].toUpperCase()
   }
   if (spot === "eight") {
     inputTurn(1, 2)
-    spotEight.innerText = gameState.board[2][1]
+    spotEight.innerText = gameState.board[2][1].toUpperCase()
   }
   if (spot === "nine") {
     inputTurn(2, 2)
-    spotNine.innerText = gameState.board[2][2]
+    spotNine.innerText = gameState.board[2][2].toUpperCase()
   }
   if (checkWin())
   document.querySelector("h1").innerText = checkWin()

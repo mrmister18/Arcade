@@ -61,5 +61,6 @@ button:hover {
 .nameDisplay {
     margin: 50px;
     width: 150px;
-    font-size: xx-large;
+    font-size: x-large;
+    display: inline-block;
 }
