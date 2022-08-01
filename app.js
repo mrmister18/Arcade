@@ -61,7 +61,7 @@ function checkTie() {
   for (let i = 0; i < gameState.board.length; i++) {
     for (let j = 0; j < gameState.board[i].length; j++) {
       if (!gameState.board[i][j]) {return}}}
-    return "Tie :-["
+    return "Tie"
     }
 
 function checkWin() {
@@ -83,6 +83,20 @@ function updateBoard() {
   spotEight.innerText = gameState.board[2][1]
   spotNine.innerText = gameState.board[2][2]
 }
+
+function playerTurn() {
+  let player = [playerDisplay, playerTwoDisplay]
+  player[Math.round(Math.random())].setAttribute("class", "playerTurn")
+}
+
+function playerTurnDisplay() {
+  if (playerDisplay.classList.contains("playerTurn")) {
+    playerDisplay.classList.toggle("playerTurn")
+  playerTwoDisplay.classList.toggle("playerTurn")}
+  else if (playerTwoDisplay.classList.contains("playerTurn")) {
+    playerTwoDisplay.classList.toggle("playerTurn")
+  playerDisplay.classList.toggle("playerTurn")
+}}
 
 let onePlayer = document.getElementById("onePlayer")
 let twoPlayer = document.getElementById("twoPlayer")
@@ -135,6 +149,7 @@ gameState.playerNames[1] += playerTwoName.value
 playerTwoDisplay.innerText = playerTwoName.value
 playerTwoName.replaceWith(playerTwoDisplay)
 submit[1].innerText = ""
+playerTurn()
   }
 })
 
@@ -162,38 +177,48 @@ document.getElementById("reset").addEventListener("click", function() {
   playerTwoDisplay.replaceWith(twoPlayer)
   playerName.value = ""
   playerTwoName.value = ""
+  playerDisplay.removeAttribute("class", "playerTurn")
+  playerTwoDisplay.removeAttribute("class", "playerTurn")
 })
-
 
 board.addEventListener("click", function(event) {
   let spot = event.target.id
   if (gameState.playerNames[0] && gameState.playerNames[1] && document.querySelector("h1").innerText === "") {
   if (spot === "one") {
     inputTurn(0, 0)
+    playerTurnDisplay()
   }
   if (spot === "two") {
     inputTurn(1, 0)
+    playerTurnDisplay()
   }
   if (spot === "three") {
     inputTurn(2, 0)
+    playerTurnDisplay()
   }
   if (spot === "four") {
     inputTurn(0, 1)
+    playerTurnDisplay()
   }
   if (spot === "five") {
     inputTurn(1, 1)
+    playerTurnDisplay()
   }
   if (spot === "six") {
     inputTurn(2, 1)
+    playerTurnDisplay()
   }
   if (spot === "seven") {
     inputTurn(0, 2)
+    playerTurnDisplay()
   }
   if (spot === "eight") {
     inputTurn(1, 2)
+    playerTurnDisplay()
   }
   if (spot === "nine") {
     inputTurn(2, 2)
+    playerTurnDisplay()
   }
   if (checkWin()) {
     updateBoard()
@@ -208,36 +233,44 @@ board.addEventListener("click", function(event) {
   if (gameState.playerNames[0] && gameState.playerNames[1] === "Computer" && document.querySelector("h1").innerText === "") {
   if (spot === "one") {
     inputTurn(0, 0)
+    computerTurn()
   }
   if (spot === "two") {
     inputTurn(1, 0)
+    computerTurn()
   }
   if (spot === "three") {
     inputTurn(2, 0)
+    computerTurn()
   }
   if (spot === "four") {
     inputTurn(0, 1)
+    computerTurn()
   }
   if (spot === "five") {
     inputTurn(1, 1)
+    computerTurn()
   }
   if (spot === "six") {
     inputTurn(2, 1)
+    computerTurn()
   }
   if (spot === "seven") {
     inputTurn(0, 2)
+    computerTurn()
   }
   if (spot === "eight") {
     inputTurn(1, 2)
+    computerTurn()
   }
   if (spot === "nine") {
     inputTurn(2, 2)
+    computerTurn()
   }
   if (checkWin()) {
     updateBoard()
   document.querySelector("h1").innerText = checkWin()
 }
-computerTurn()
 updateBoard()
 }
 })
